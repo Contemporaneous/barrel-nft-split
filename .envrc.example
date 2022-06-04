@@ -1,0 +1,6 @@
+# Used to deploy
+export WALLET_PRIVATE_KEY=''
+export STAGING_ALCHEMY_KEY=''
+
+# Used for verifying contracts on Optimism Etherscan
+export OP_ETHERSCAN_API_KEY=''
