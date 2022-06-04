@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 import "hardhat/console.sol";
 contract Barrel is ERC721 {
 
-    address private owner;
+    address public owner;
     uint256 public totalSupply;
     uint256 public expectedSupply;
 
