@@ -11,12 +11,6 @@ const startPrice = ethers.utils.parseEther('1.5');
 const endPrice = ethers.utils.parseEther('0.1');
 const intervals = 24;
 
-function delay(milliseconds){
-    return new Promise(resolve => {
-        setTimeout(resolve, milliseconds);
-    });
-}
-
 const genContract = async (adj) => {
     accounts = await ethers.getSigners();
     let dateRelease = new Date(); // now
@@ -27,14 +21,13 @@ const genContract = async (adj) => {
     const BarrelFactory = await ethers.getContractFactory("Barrel");
     barrel = await BarrelFactory.connect(accounts[0]).deploy(totalSupply, expectedSupply, releaseDate, expireDate, startPrice, endPrice, intervals);
     await barrel.deployed();
-    await delay(100);
+
     price = await barrel.connect(accounts[0]).getPrice();
-    console.log("Price:", (price/(1*10**18)).toString());
 };
 
 
 beforeEach(async () => {
-    await genContract(0);
+    await genContract(2500);
 });
 
 describe("Deployment", function () {
