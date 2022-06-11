@@ -43,6 +43,7 @@ describe("Deployment", function () {
 describe("Minting", function () {
     it("Should Mint to correct address", async function () {
         price = await barrel.getPrice();
+        
         await barrel.connect(accounts[1]).generateNFT({value: price});
         expect(await barrel.ownerOf(0)).to.equal(accounts[1].address);
     });
