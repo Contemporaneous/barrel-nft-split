@@ -3,7 +3,8 @@ const { expect, assert } = require("chai");
 
 let barrel;
 let accounts;
-let start;
+let price;
+
 const totalSupply = 5;
 const expectedSupply = 3;
 const startPrice = ethers.utils.parseEther('1.5');
@@ -41,13 +42,13 @@ describe("Deployment", function () {
 
 describe("Minting", function () {
     it("Should Mint to correct address", async function () {
-        let price = await barrel.getPrice();
+        price = await barrel.getPrice();
         await barrel.connect(accounts[1]).generateNFT({value: price});
         expect(await barrel.ownerOf(0)).to.equal(accounts[1].address);
     });
 
     it("Should not exceed total supply", async function() {
-        let price = await barrel.getPrice();
+        price = await barrel.getPrice();
 
         const func = async () => {
             for (let i = 0; i = totalSupply; i++) {
@@ -66,7 +67,7 @@ describe("Minting", function () {
     });
 
     it("Should Show Correct Position", async function () {
-        let price = await barrel.getPrice();
+        price = await barrel.getPrice();
 
         await barrel.connect(accounts[1]).generateNFT({value: price});
         res = await barrel.getPosition(0);
