@@ -6,6 +6,11 @@ on:
       - main
       - 'releases/*'
 
+env:
+  OP_ETHERSCAN_API_KEY: Fred
+  WALLET_PRIVATE_KEY: Kevin
+
+
 jobs:
   # unit tests
   units:
