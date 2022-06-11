@@ -22,7 +22,12 @@ const genContract = async (adj) => {
     barrel = await BarrelFactory.connect(accounts[0]).deploy(totalSupply, expectedSupply, releaseDate, expireDate, startPrice, endPrice, intervals);
     await barrel.deployed();
 
-    price = await barrel.getPrice();
+    try {
+        price = await barrel.getPrice();
+    } catch (e) {
+        price = await barrel.getPrice();
+    }
+
 };
 
 
