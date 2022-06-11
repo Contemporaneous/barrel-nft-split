@@ -28,6 +28,7 @@ const genContract = async (adj) => {
     barrel = await BarrelFactory.connect(accounts[0]).deploy(totalSupply, expectedSupply, releaseDate, expireDate, startPrice, endPrice, intervals);
     await barrel.deployed();
     await delay(100);
+    price = await barrel.connect(accounts[0]).getPrice();
 };
 
 
@@ -49,14 +50,14 @@ describe("Deployment", function () {
 
 describe("Minting", function () {
     it("Should Mint to correct address", async function () {
-        await barrel.connect(accounts[1]).generateNFT({value: startPrice});
+        await barrel.connect(accounts[1]).generateNFT({value: price});
         expect(await barrel.ownerOf(0)).to.equal(accounts[1].address);
     });
 
     it("Should not exceed total supply", async function() {
         const func = async () => {
             for (let i = 0; i = totalSupply; i++) {
-                let fred = await barrel.generateNFT({value: startPrice});
+                let fred = await barrel.generateNFT({value: price});
                 fred.wait();
             }
         };
@@ -71,7 +72,7 @@ describe("Minting", function () {
     });
 
     it("Should Show Correct Position", async function () {
-        await barrel.connect(accounts[1]).generateNFT({value: startPrice});
+        await barrel.connect(accounts[1]).generateNFT({value: price});
         res = await barrel.getPosition(0);
 
         expect(res[0]).to.equal(true);
