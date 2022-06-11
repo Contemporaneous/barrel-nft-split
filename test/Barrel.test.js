@@ -49,16 +49,14 @@ describe("Deployment", function () {
 
 describe("Minting", function () {
     it("Should Mint to correct address", async function () {
-        price = await barrel.connect(accounts[0]).getPrice();
-        await barrel.connect(accounts[1]).generateNFT({value: price});
+        await barrel.connect(accounts[1]).generateNFT({value: startPrice});
         expect(await barrel.ownerOf(0)).to.equal(accounts[1].address);
     });
 
     it("Should not exceed total supply", async function() {
-        price = await barrel.connect(accounts[0]).getPrice();
         const func = async () => {
             for (let i = 0; i = totalSupply; i++) {
-                let fred = await barrel.generateNFT({value: price});
+                let fred = await barrel.generateNFT({value: startPrice});
                 fred.wait();
             }
         };
@@ -73,8 +71,7 @@ describe("Minting", function () {
     });
 
     it("Should Show Correct Position", async function () {
-        price = await barrel.connect(accounts[0]).getPrice();
-        await barrel.connect(accounts[1]).generateNFT({value: price});
+        await barrel.connect(accounts[1]).generateNFT({value: startPrice});
         res = await barrel.getPosition(0);
 
         expect(res[0]).to.equal(true);
