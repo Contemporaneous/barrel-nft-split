@@ -29,6 +29,7 @@ const genContract = async (adj) => {
     await barrel.deployed();
     await delay(100);
     price = await barrel.connect(accounts[0]).getPrice();
+    console.log("Price:", (price/(1*10**18)).toString());
 };
 
 
