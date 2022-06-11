@@ -12,5 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - run: npm ci
+    - uses: actions/setup-node@v3
+    - run: npm install
     - run: npx hardhat test --show-stack-traces
