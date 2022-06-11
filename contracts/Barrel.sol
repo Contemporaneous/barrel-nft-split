@@ -40,12 +40,24 @@ contract Barrel is ERC721 {
     }
 
     function getPrice() public view returns (uint256) {
-        if (block.timestamp >= (releaseTime + (increments+1) * 3600)){
-            return endPrice;
-        } else {
-            return (increments-(block.timestamp-releaseTime)/3600) * (startPrice-endPrice)/increments + endPrice;
+        unchecked {
+
+            if (block.timestamp >= (releaseTime + ((increments+1) * 3600))){
+                return endPrice;
+            } else if (block.timestamp <= releaseTime) {
+                return startPrice;
+            } else {
+                uint256 bTime = block.timestamp;
+                uint256 dT = bTime - releaseTime;
+                uint256 dThours = dT/3600;
+
+                uint256 deltaPrice = startPrice - endPrice;
+                uint256 incrementValue = deltaPrice / increments;
+                uint256 price = startPrice - (dThours * incrementValue);
+
+                return price;
+            }
         }
-        
     }
 
     function generateNFT() public payable{

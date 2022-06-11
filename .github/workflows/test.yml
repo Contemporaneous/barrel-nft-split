@@ -1,0 +1,22 @@
+name: "units-test"
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - 'releases/*'
+
+env:
+  STAGING_ALCHEMY_KEY: "Fred"
+  WALLET_PRIVATE_KEY: "0000000000000000000000000000000000000000000000000000000000000000"
+
+
+jobs:
+  # unit tests
+  units:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+    - run: npm install
+    - run: npx hardhat test
