@@ -11,6 +11,13 @@ module.exports = {
     "optimistic-kovan": {
       url: process.env.STAGING_ALCHEMY_KEY,
       accounts: [process.env.WALLET_PRIVATE_KEY],
+    },
+    "localhost": {
+      url: "http://127.0.0.1:8545",
+      gas: 12000000,
+      chainId: 31337,
+      blockGasLimit: 0x1fffffffffffff,
+      allowUnlimitedContractSize: true,
     }
   },
   etherscan: {
