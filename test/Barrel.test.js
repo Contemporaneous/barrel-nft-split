@@ -1,6 +1,5 @@
 const { getContractFactory } = require("@nomiclabs/hardhat-ethers/types");
 const { expect, assert } = require("chai");
-const { ethers } = require("hardhat");
 
 let barrel;
 let accounts;
